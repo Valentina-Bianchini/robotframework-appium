@@ -49,7 +49,7 @@ Create New Object
     # Send POST request
     ${response}=    POST On Session    restful_api    /objects    json=${body}
     
-    # Verify response status code (201 Created)
+    # Verify response status code (200 Created)
     Should Be Equal As Strings    ${response.status_code}    200
     
     # Verify response contains the created object
