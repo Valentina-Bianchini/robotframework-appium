@@ -27,12 +27,12 @@ ${UDID}                         ZY22FLDZMN               # ⚠️ UDID único de
 ${APP}                          C:/Users/ValentinaBianchini/Desktop/robot-framework-appium/resources/android/mda-2.2.0-25.apk    # ⚠️ Ruta absoluta del APK a testear
 ${APP_PACKAGE}                  com.saucelabs.mydemoapp.android                # Package name de la app (obtener con Appium Inspector)
 ${APP_ACTIVITY}                 .view.activities.SplashActivity                # Activity inicial de la app
-${WAIT_FOR_IDLE_TIMEOUT}        ${10000}                 # Timeout en milisegundos para esperar que la app esté idle (debe ser número entero)
+${WAIT_FOR_IDLE_TIMEOUT}        ${6000}                 # Timeout en milisegundos para esperar que la app esté idle (debe ser número entero)
 
 # ========================================
 # TIMEOUTS GENERALES
 # ========================================
-${TIMEOUT}                      10                       # Timeout por defecto en segundos para elementos
+${TIMEOUT}                      5                       # Timeout por defecto en segundos para elementos
 
 ***Keywords***
 # ========================================

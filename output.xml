@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.2 on win32)" generated="2026-01-14T11:43:42.271255" rpa="false" schemaversion="5">
+<suite id="s1" name="objectsTest" source="C:\Users\ValentinaBianchini\Desktop\robot-framework-appium\api\objectsTest.robot">
+<test id="s1-t1" name="Get Object By ID" line="11">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-01-14T11:43:42.398039" level="INFO">Creating Session using : alias=restful_api, url=https://api.restful-api.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>restful_api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-01-14T11:43:42.397821" elapsed="0.000417"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-01-14T11:43:44.834548" level="INFO">GET Request : url=https://api.restful-api.dev/objects/2 
+ path_url=/objects/2 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-01-14T11:43:44.834758" level="INFO">GET Response : url=https://api.restful-api.dev/objects/2 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 14 Jan 2026 14:43:43 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Server': 'cloudflare', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=NYt9QQZHtL%2FgkyE5B396Pd9uOS0MBECDpxOlWMg5HPQ1cK43GUodGNHb7Hnzm9a2wRf9HVuORTieLYnOjj2P6UQSd0%2FA6OTAV8oJoSbsLtqd"}]}', 'Content-Encoding': 'zstd', 'CF-RAY': '9bdde8384c75203c-EZE', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":"2","name":"Apple iPhone 12 Mini, 256GB, Blue","data":null} 
+ </msg>
+<msg time="2026-01-14T11:43:44.834863" level="INFO">C:\Users\ValentinaBianchini\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api.restful-api.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-01-14T11:43:44.835277" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>restful_api</arg>
+<arg>/objects/${OBJECT_ID}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-01-14T11:43:42.398491" elapsed="2.436857"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2026-01-14T11:43:44.836926" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.835842" elapsed="0.001198"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-01-14T11:43:44.838052" level="INFO">Length is 3.</msg>
+<arg>${response.json()}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.837364" elapsed="0.000726"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.838429" elapsed="0.000377"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[id]</arg>
+<arg>${OBJECT_ID}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.839096" elapsed="0.000533"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.839862" elapsed="0.000339"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-01-14T11:43:44.841418" level="INFO">Length is 33.</msg>
+<arg>${response.json()}[name]</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.840954" elapsed="0.000502"/>
+</kw>
+<arg>'${response.json()}[name]' != 'None'</arg>
+<arg>Should Not Be Empty</arg>
+<arg>${response.json()}[name]</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.840378" elapsed="0.001119"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>data</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.841728" elapsed="0.000315"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${response.json()}[data] is not None</arg>
+<arg>Validate Data Fields</arg>
+<arg>${response.json()}[data]</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.842349" elapsed="0.000617"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-01-14T11:43:44.843677" level="INFO">Response Status: 200</msg>
+<arg>Response Status: ${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.843183" elapsed="0.000538"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-01-14T11:43:44.844533" level="INFO">Response Body: {'id': '2', 'name': 'Apple iPhone 12 Mini, 256GB, Blue', 'data': None}</msg>
+<arg>Response Body: ${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.843996" elapsed="0.000572"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2026-01-14T11:43:44.844897" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2026-01-14T11:43:44.844839" elapsed="0.000117"/>
+</kw>
+<doc>Test GET request to retrieve object with ID 2</doc>
+<tag>API</tag>
+<tag>GET</tag>
+<status status="PASS" start="2026-01-14T11:43:42.396934" elapsed="2.448111"/>
+</test>
+<test id="s1-t2" name="Create New Object" line="41">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-01-14T11:43:44.845978" level="INFO">Creating Session using : alias=restful_api, url=https://api.restful-api.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>restful_api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-01-14T11:43:44.845849" elapsed="0.000301"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-14T11:43:44.846852" level="INFO">${body} = {'name': 'Apple MacBook Pro 16', 'data': {'year': '2019', 'price': '1849.99', 'CPU model': 'Intel Core i9', 'Hard disk size': '1 TB'}}</msg>
+<var>${body}</var>
+<arg>name=Apple MacBook Pro 16</arg>
+<arg>data=${POST_DATA}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.846372" elapsed="0.000512"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-01-14T11:43:47.434763" level="INFO">POST Request : url=https://api.restful-api.dev/objects 
+ path_url=/objects 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '134', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Apple MacBook Pro 16", "data": {"year": "2019", "price": "1849.99", "CPU model": "Intel Core i9", "Hard disk size": "1 TB"}}' 
+ </msg>
+<msg time="2026-01-14T11:43:47.434954" level="INFO">POST Response : url=https://api.restful-api.dev/objects 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 14 Jan 2026 14:43:46 GMT', 'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Server': 'cloudflare', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=f8JASs%2BD1h%2BxhLKmUd0GSQDZ8YyTxfOWPoLTO5pNHwALPjBoISRLBhIpsn2IgeLAyNTeJboiK9IMi2qCSCCN80ybNMB440Hq3sSJ6oyQvhl8"}]}', 'Content-Encoding': 'zstd', 'CF-RAY': '9bdde8478e2c2ddb-EZE', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":"ff8081819782e69e019bbcf66bfa4248","name":"Apple MacBook Pro 16","createdAt":"2026-01-14T14:43:44.762+00:00","data":{"year":"2019","price":"1849.99","CPU model":"Intel Core i9","Hard disk size":"1 TB"}} 
+ </msg>
+<msg time="2026-01-14T11:43:47.435071" level="INFO">C:\Users\ValentinaBianchini\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api.restful-api.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2026-01-14T11:43:47.435506" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>restful_api</arg>
+<arg>/objects</arg>
+<arg>json=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-01-14T11:43:44.847103" elapsed="2.588460"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2026-01-14T11:43:47.436798" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.435984" elapsed="0.000883"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-01-14T11:43:47.437949" level="INFO">Length is 4.</msg>
+<arg>${response.json()}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.437111" elapsed="0.000901"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.438232" elapsed="0.000368"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.438786" elapsed="0.000439"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}[name]</arg>
+<arg>Apple MacBook Pro 16</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.439410" elapsed="0.000695"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>data</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.440318" elapsed="0.000356"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-01-14T11:43:47.441359" level="INFO">${response_data} = {'year': '2019', 'price': '1849.99', 'CPU model': 'Intel Core i9', 'Hard disk size': '1 TB'}</msg>
+<var>${response_data}</var>
+<arg>${response.json()}[data]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.440906" elapsed="0.000474"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<arg>${response_data}[year]</arg>
+<arg>2019</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.441586" elapsed="0.000398"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<arg>${response_data}[price]</arg>
+<arg>1849.99</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.442203" elapsed="0.000343"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response_data}[CPU model]</arg>
+<arg>Intel Core i9</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.442765" elapsed="0.000318"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response_data}[Hard disk size]</arg>
+<arg>1 TB</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.443303" elapsed="0.000324"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-01-14T11:43:47.444284" level="INFO">Created Object ID: ff8081819782e69e019bbcf66bfa4248</msg>
+<arg>Created Object ID: ${response.json()}[id]</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.443801" elapsed="0.000521"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-01-14T11:43:47.444925" level="INFO">Response Body: {'id': 'ff8081819782e69e019bbcf66bfa4248', 'name': 'Apple MacBook Pro 16', 'createdAt': '2026-01-14T14:43:44.762+00:00', 'data': {'year': '2019', 'price': '1849.99', 'CPU model': 'Intel Core i9', 'Hard disk size': '1 TB'}}</msg>
+<arg>Response Body: ${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-01-14T11:43:47.444494" elapsed="0.000465"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2026-01-14T11:43:47.445274" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2026-01-14T11:43:47.445209" elapsed="0.000118"/>
+</kw>
+<doc>Test POST request to create a new object</doc>
+<tag>API</tag>
+<tag>POST</tag>
+<status status="PASS" start="2026-01-14T11:43:44.845473" elapsed="2.600057"/>
+</test>
+<status status="PASS" start="2026-01-14T11:43:42.273445" elapsed="5.172805"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="2" fail="0" skip="0">API</stat>
+<stat pass="1" fail="0" skip="0">GET</stat>
+<stat pass="1" fail="0" skip="0">POST</stat>
+</tag>
+<suite>
+<stat name="objectsTest" id="s1" pass="2" fail="0" skip="0">objectsTest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

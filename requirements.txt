@@ -1,1 +1,2 @@
 robotframework-appiumlibrary==2.3.0
+robotframework-requests==0.9.6

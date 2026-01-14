@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "*.robot": "robotframework"
+  },
+  "editor.semanticHighlighting.enabled": true
+}

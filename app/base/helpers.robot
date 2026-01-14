@@ -69,7 +69,7 @@ Element Should Be Present
 # ========================================
 Hide Keyboard
     [Documentation]    Oculta el teclado virtual del dispositivo
-    Press Keys    None    BACK                                   # Presiona BACK para cerrar teclado
+    Press Key Code    4                                          # BACK en Android
 
 # ========================================
 # KEYWORD: Scroll Down
@@ -83,7 +83,7 @@ Scroll Down
     [Arguments]    ${times}=1
     [Documentation]    Realiza scroll hacia abajo en la pantalla
     FOR    ${i}    IN RANGE    ${times}
-        Swipe    500    1200    500    400    1000               # Coordenadas: x_start, y_start, x_end, y_end, duration_ms
+        Swipe    start_x=500    start_y=1200    end_x=500    end_y=400    duration=1000
     END
 
 # ========================================
@@ -98,5 +98,5 @@ Scroll Up
     [Arguments]    ${times}=1
     [Documentation]    Realiza scroll hacia arriba en la pantalla
     FOR    ${i}    IN RANGE    ${times}
-        Swipe    500    400    500    1200    1000               # Coordenadas inversas al scroll down
+        Swipe    start_x=500    start_y=400    end_x=500    end_y=1200    duration=1000
     END
