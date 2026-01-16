@@ -1,2 +1,4 @@
 robotframework-appiumlibrary==2.3.0
 robotframework-requests==0.9.6
+robotframework-seleniumlibrary>=6.0.0
+webdriver-manager>=3.8.0

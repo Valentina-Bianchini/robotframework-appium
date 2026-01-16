@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Object Schema",
+  "description": "Schema for API objects returned by restful-api.dev",
+  "type": "object",
+  "required": ["id", "name", "data"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the object",
+      "pattern": "^[0-9]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the object",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "data": {
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "Additional data fields for the object"
+        },
+        {
+          "type": "null",
+          "description": "Data can be null"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}
