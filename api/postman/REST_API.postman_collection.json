@@ -1,0 +1,303 @@
+{
+  "info": {
+    "_postman_id": "ad056f92-1e48-4f6e-ba3e-95a9e957a31e",
+    "name": "REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-01-12T12:50:40.000Z",
+    "updatedAt": "2026-01-14T14:13:36.000Z",
+    "lastUpdatedBy": "28539474",
+    "uid": "28539474-ad056f92-1e48-4f6e-ba3e-95a9e957a31e"
+  },
+  "item": [
+    {
+      "name": "GET",
+      "id": "f00d0eea-0085-4625-89a4-ea8c0878943f",
+      "uid": "28539474-f00d0eea-0085-4625-89a4-ea8c0878943f",
+      "item": [
+        {
+          "name": "All objects",
+          "id": "59f142ff-e397-4c0f-b89b-351f6b39e6b3",
+          "uid": "28539474-59f142ff-e397-4c0f-b89b-351f6b39e6b3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test: Verify Status Code is 200",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test: Verify Response Time is less than 2000ms",
+                  "pm.test(\"Response time is less than 2000ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "// Test: Verify Content-Type header",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});",
+                  "",
+                  "// Test: Verify Response is JSON array",
+                  "pm.test(\"Response is a JSON array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('array');",
+                  "});",
+                  "",
+                  "// Test: Verify Array is not empty",
+                  "pm.test(\"Response array is not empty\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length).to.be.above(0);",
+                  "});",
+                  "",
+                  "// Test: Verify Object Schema",
+                  "pm.test(\"Each object has required fields\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    jsonData.forEach(function(object) {",
+                  "        pm.expect(object).to.have.property('id');",
+                  "        pm.expect(object).to.have.property('name');",
+                  "        pm.expect(object).to.have.property('data');",
+                  "    });",
+                  "});",
+                  "",
+                  "// Test: Verify Data Types",
+                  "pm.test(\"Object properties have correct types\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData.length > 0) {",
+                  "        var firstObject = jsonData[0];",
+                  "        pm.expect(firstObject.id).to.be.a('string');",
+                  "        pm.expect(firstObject.name).to.be.a('string');",
+                  "    }",
+                  "});",
+                  "",
+                  "// Save first object ID for later use",
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    if (jsonData.length > 0) {",
+                  "        pm.environment.set(\"object_id\", jsonData[0].id);",
+                  "    }",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/objects",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "objects"
+              ]
+            }
+          }
+        },
+        {
+          "name": "One object",
+          "id": "9b496815-9e93-4f62-ba3c-d95d70e4b90b",
+          "uid": "28539474-9b496815-9e93-4f62-ba3c-d95d70e4b90b",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test: Verify Status Code is 200",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test: Verify Response Time",
+                  "pm.test(\"Response time is less than 1500ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);",
+                  "});",
+                  "",
+                  "// Test: Verify Content-Type header",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});",
+                  "",
+                  "// Test: Verify Response is JSON object",
+                  "pm.test(\"Response is a JSON object\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('object');",
+                  "});",
+                  "",
+                  "// Test: Verify Object has required fields",
+                  "pm.test(\"Object has required fields\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('id');",
+                  "    pm.expect(jsonData).to.have.property('name');",
+                  "    pm.expect(jsonData).to.have.property('data');",
+                  "});",
+                  "",
+                  "// Test: Verify specific object ID",
+                  "pm.test(\"Object ID is '2'\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id).to.equal('2');",
+                  "});",
+                  "",
+                  "// Test: Verify object name is not empty",
+                  "pm.test(\"Object name is not empty\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.name).to.not.be.empty;",
+                  "});",
+                  "",
+                  "// Test: Verify Data Types",
+                  "pm.test(\"Object properties have correct types\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id).to.be.a('string');",
+                  "    pm.expect(jsonData.name).to.be.a('string');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/objects/2",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "objects",
+                "2"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST",
+      "id": "84b2e3ea-302c-427c-9685-a5c3bb913845",
+      "uid": "28539474-84b2e3ea-302c-427c-9685-a5c3bb913845",
+      "item": [
+        {
+          "name": "New object",
+          "id": "5eb0c921-5b19-4db7-8e66-8f31f23ce411",
+          "uid": "28539474-5eb0c921-5b19-4db7-8e66-8f31f23ce411",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Test: Verify Status Code is 200",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// Test: Verify Response Time",
+                  "pm.test(\"Response time is less than 2000ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "// Test: Verify Content-Type header",
+                  "pm.test(\"Content-Type is application/json\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+                  "});",
+                  "",
+                  "// Test: Verify Response is JSON object",
+                  "pm.test(\"Response is a JSON object\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.be.an('object');",
+                  "});",
+                  "",
+                  "// Test: Verify Created Object has ID",
+                  "pm.test(\"Created object has ID\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('id');",
+                  "    pm.expect(jsonData.id).to.not.be.empty;",
+                  "});",
+                  "",
+                  "// Test: Verify Created Object has createdAt",
+                  "pm.test(\"Created object has createdAt timestamp\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('createdAt');",
+                  "});",
+                  "",
+                  "// Test: Verify Name matches request",
+                  "pm.test(\"Object name matches request\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.name).to.equal('Apple MacBook Pro 16');",
+                  "});",
+                  "",
+                  "// Test: Verify Data object exists",
+                  "pm.test(\"Object has data property\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('data');",
+                  "    pm.expect(jsonData.data).to.be.an('object');",
+                  "});",
+                  "",
+                  "// Test: Verify Data fields match request",
+                  "pm.test(\"Data fields match request\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.year).to.equal(2019);",
+                  "    pm.expect(jsonData.data.price).to.equal(1849.99);",
+                  "    pm.expect(jsonData.data['CPU model']).to.equal('Intel Core i9');",
+                  "    pm.expect(jsonData.data['Hard disk size']).to.equal('1 TB');",
+                  "});",
+                  "",
+                  "// Test: Verify Data Types",
+                  "pm.test(\"Object properties have correct types\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.id).to.be.a('string');",
+                  "    pm.expect(jsonData.name).to.be.a('string');",
+                  "    pm.expect(jsonData.data.year).to.be.a('number');",
+                  "    pm.expect(jsonData.data.price).to.be.a('number');",
+                  "});",
+                  "",
+                  "// Save created object ID for cleanup",
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set(\"created_object_id\", jsonData.id);",
+                  "    console.log(\"Created object with ID: \" + jsonData.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"name\": \"Apple MacBook Pro 16\",\r\n   \"data\": {\r\n      \"year\": 2019,\r\n      \"price\": 1849.99,\r\n      \"CPU model\": \"Intel Core i9\",\r\n      \"Hard disk size\": \"1 TB\"\r\n   }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/objects",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "objects"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "https://api.restful-api.dev",
+      "type": "default"
+    }
+  ]
+}
