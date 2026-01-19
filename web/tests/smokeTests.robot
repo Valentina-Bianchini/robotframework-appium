@@ -88,3 +88,7 @@ Dropdown Should Have Multiple Options
 Find Flights Button Should Be Enabled
     [Documentation]    Verifica que el botón Find Flights está habilitado
     Verify Find Flights Button Is Enabled
+
+Available Flights Should Be Shown
+    [Documentation]    Verifica que los vuelos disponibles se muestran en la página de resultados
+    Page Should Contain    Choose your flight

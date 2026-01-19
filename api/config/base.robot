@@ -101,7 +101,7 @@ Get Timestamp
     [Documentation]    Obtiene timestamp actual en formato ISO
     ...                Útil para generar datos únicos en tests
     ${timestamp}=    Get Current Date    result_format=%Y-%m-%dT%H:%M:%S
-    [Return]    ${timestamp}
+    RETURN    ${timestamp}
 
 Generate Unique Name
     [Documentation]    Genera nombre único para objetos de prueba
@@ -109,4 +109,4 @@ Generate Unique Name
     [Arguments]    ${prefix}=TestObject
     ${timestamp}=    Get Current Date    result_format=%Y%m%d%H%M%S
     ${unique_name}=    Set Variable    ${prefix}_${timestamp}
-    [Return]    ${unique_name}
+    RETURN    ${unique_name}

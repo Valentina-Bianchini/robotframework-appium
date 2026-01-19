@@ -22,7 +22,7 @@ Get Total Cost
     [Documentation]    Obtiene el costo total del vuelo
     ${cost}=    Get Text    ${PURCHASE_TOTAL_COST}
     Log    Total cost: ${cost}
-    [Return]    ${cost}
+    RETURN    ${cost}
 
 Fill Personal Information
     [Documentation]    Llena los campos de información personal
@@ -123,12 +123,12 @@ Verify Form Fields Are Filled
 Get Selected Card Type
     [Documentation]    Obtiene el tipo de tarjeta seleccionado
     ${card_type}=    Get Selected List Label    ${PURCHASE_CARD_TYPE_SELECT}
-    [Return]    ${card_type}
+    RETURN    ${card_type}
 
 Get All Card Types
     [Documentation]    Obtiene todos los tipos de tarjeta disponibles
     @{card_types}=    Get List Items    ${PURCHASE_CARD_TYPE_SELECT}
-    [Return]    @{card_types}
+    RETURN    @{card_types}
 
 Clear Personal Information Fields
     [Documentation]    Limpia todos los campos de información personal
@@ -152,12 +152,12 @@ Verify Purchase Button Is Enabled
 Get Name Input Value
     [Documentation]    Obtiene el valor del campo de nombre
     ${value}=    Get Value    ${PURCHASE_NAME_INPUT}
-    [Return]    ${value}
+    RETURN    ${value}
 
 Get Card Number Input Value
     [Documentation]    Obtiene el valor del campo de número de tarjeta
     ${value}=    Get Value    ${PURCHASE_CARD_NUMBER_INPUT}
-    [Return]    ${value}
+    RETURN    ${value}
 
 Verify Required Fields Are Present
     [Documentation]    Verifica que todos los campos requeridos están presentes

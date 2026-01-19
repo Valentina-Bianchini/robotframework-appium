@@ -17,7 +17,7 @@ GET Request
     Log Request    GET    ${endpoint}
     ${response}=    GET On Session    ${SESSION_ALIAS}    ${endpoint}    expected_status=${expected_status}
     Log Response    ${response}
-    [Return]    ${response}
+    RETURN    ${response}
 
 POST Request
     [Documentation]    Realiza petición POST con body JSON
@@ -26,7 +26,7 @@ POST Request
     Log Request    POST    ${endpoint}    ${body}
     ${response}=    POST On Session    ${SESSION_ALIAS}    ${endpoint}    json=${body}    expected_status=${expected_status}
     Log Response    ${response}
-    [Return]    ${response}
+    RETURN    ${response}
 
 PUT Request
     [Documentation]    Realiza petición PUT para actualización completa
@@ -35,7 +35,7 @@ PUT Request
     Log Request    PUT    ${endpoint}    ${body}
     ${response}=    PUT On Session    ${SESSION_ALIAS}    ${endpoint}    json=${body}    expected_status=${expected_status}
     Log Response    ${response}
-    [Return]    ${response}
+    RETURN    ${response}
 
 PATCH Request
     [Documentation]    Realiza petición PATCH para actualización parcial
@@ -44,7 +44,7 @@ PATCH Request
     Log Request    PATCH    ${endpoint}    ${body}
     ${response}=    PATCH On Session    ${SESSION_ALIAS}    ${endpoint}    json=${body}    expected_status=${expected_status}
     Log Response    ${response}
-    [Return]    ${response}
+    RETURN    ${response}
 
 DELETE Request
     [Documentation]    Realiza petición DELETE con validación
@@ -53,7 +53,7 @@ DELETE Request
     Log Request    DELETE    ${endpoint}
     ${response}=    DELETE On Session    ${SESSION_ALIAS}    ${endpoint}    expected_status=${expected_status}
     Log Response    ${response}
-    [Return]    ${response}
+    RETURN    ${response}
 
 # ==================== VALIDATIONS ====================
 
@@ -154,14 +154,14 @@ Create Object Body
     [Arguments]    ${name}    ${data}=${NONE}
     ${body}=    Create Dictionary    name=${name}
     Run Keyword If    ${data} is not ${NONE}    Set To Dictionary    ${body}    data=${data}
-    [Return]    ${body}
+    RETURN    ${body}
 
 Create Object With Data
     [Documentation]    Crea diccionario de datos para campo 'data'
     ...                Acepta pares key=value como argumentos
     [Arguments]    &{data_fields}
     ${data}=    Create Dictionary    &{data_fields}
-    [Return]    ${data}
+    RETURN    ${data}
 
 Extract Object ID
     [Documentation]    Extrae el ID de un objeto de la respuesta
@@ -169,7 +169,7 @@ Extract Object ID
     [Arguments]    ${response}
     ${json}=    Set Variable    ${response.json()}
     ${id}=    Get From Dictionary    ${json}    id
-    [Return]    ${id}
+    RETURN    ${id}
 
 Extract Field From Response
     [Documentation]    Extrae un campo específico de la respuesta
@@ -177,7 +177,7 @@ Extract Field From Response
     [Arguments]    ${response}    ${field_name}
     ${json}=    Set Variable    ${response.json()}
     ${value}=    Get From Dictionary    ${json}    ${field_name}
-    [Return]    ${value}
+    RETURN    ${value}
 
 # ==================== LIST HELPERS ====================
 
@@ -201,7 +201,7 @@ Filter Objects By Name
         ${contains}=    Evaluate    '${name_pattern}'.lower() in '${name}'.lower()
         Run Keyword If    ${contains}    Append To List    ${filtered}    ${object}
     END
-    [Return]    ${filtered}
+    RETURN    ${filtered}
 
 # ==================== JSON SCHEMA VALIDATION ====================
 

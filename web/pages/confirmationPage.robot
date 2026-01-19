@@ -7,7 +7,24 @@ Library          String
 Resource         ../data/locators.robot
 Resource         ../data/testData.robot
 
+Suite Setup      Initialize Purchase Details Suite Variable
+
+*** Variables ***
+${PURCHASE_DETAILS}    ${EMPTY}
+
 *** Keywords ***
+Initialize Purchase Details Suite Variable
+    [Documentation]    Inicializa la variable de suite de detalles de compra
+    ${empty_details}=    Create Dictionary
+    ...    confirmation_code=${EMPTY}
+    ...    status=${EMPTY}
+    ...    amount=${EMPTY}
+    ...    card_number=${EMPTY}
+    ...    expiration=${EMPTY}
+    ...    auth_code=${EMPTY}
+    ...    timestamp=${EMPTY}
+    Set Suite Variable    ${PURCHASE_DETAILS}    ${empty_details}
+
 Verify Confirmation Page Is Displayed
     [Documentation]    Verifica que la página de confirmación está visible
     Wait Until Page Contains Element    ${CONFIRM_PAGE_HEADING}    ${MEDIUM_TIMEOUT}
@@ -25,48 +42,48 @@ Get Confirmation Code
     ${code}=    Get Text    ${CONFIRM_CONFIRMATION_CODE}
     Should Not Be Empty    ${code}
     Log    Confirmation code: ${code}
-    [Return]    ${code}
+    RETURN    ${code}
 
 Get Purchase Status
     [Documentation]    Obtiene el estado de la compra
     ${status}=    Get Text    ${CONFIRM_STATUS}
     Log    Purchase status: ${status}
-    [Return]    ${status}
+    RETURN    ${status}
 
 Get Total Amount
     [Documentation]    Obtiene el monto total pagado
     ${amount}=    Get Text    ${CONFIRM_AMOUNT}
     Should Not Be Empty    ${amount}
     Log    Total amount: ${amount}
-    [Return]    ${amount}
+    RETURN    ${amount}
 
 Get Card Number
     [Documentation]    Obtiene el número de tarjeta (parcialmente oculto)
     ${card}=    Get Text    ${CONFIRM_CARD_NUMBER}
     Should Not Be Empty    ${card}
     Log    Card number: ${card}
-    [Return]    ${card}
+    RETURN    ${card}
 
 Get Card Expiration
     [Documentation]    Obtiene la fecha de expiración de la tarjeta
     ${expiration}=    Get Text    ${CONFIRM_EXPIRATION}
     Should Not Be Empty    ${expiration}
     Log    Card expiration: ${expiration}
-    [Return]    ${expiration}
+    RETURN    ${expiration}
 
 Get Authorization Code
     [Documentation]    Obtiene el código de autorización
     ${auth_code}=    Get Text    ${CONFIRM_AUTH_CODE}
     Should Not Be Empty    ${auth_code}
     Log    Authorization code: ${auth_code}
-    [Return]    ${auth_code}
+    RETURN    ${auth_code}
 
 Get Transaction Timestamp
     [Documentation]    Obtiene la fecha/hora de la transacción
     ${timestamp}=    Get Text    ${CONFIRM_TIMESTAMP}
     Should Not Be Empty    ${timestamp}
     Log    Transaction timestamp: ${timestamp}
-    [Return]    ${timestamp}
+    RETURN    ${timestamp}
 
 Verify Purchase Status Is Success
     [Documentation]    Verifica que el estado de compra es exitoso
@@ -113,7 +130,7 @@ Get All Purchase Details
     ${details.timestamp}=    Get Transaction Timestamp
     
     Log    Purchase details: ${details}
-    [Return]    &{details}
+    RETURN    &{details}
 
 Verify All Required Fields Are Present
     [Documentation]    Verifica que todos los campos requeridos están presentes
@@ -139,7 +156,7 @@ Verify Timestamp Format Is Valid
 Save Purchase Details To Suite Variable
     [Documentation]    Guarda los detalles de compra en variable de suite
     &{details}=    Get All Purchase Details
-    Set Suite Variable    &{PURCHASE_DETAILS}    &{details}
+    Set Suite Variable    ${PURCHASE_DETAILS}    ${details}
     Log    Saved purchase details to suite variable
 
 Log All Purchase Details

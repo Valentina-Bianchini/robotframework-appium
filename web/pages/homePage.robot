@@ -41,22 +41,22 @@ Select Destination City
 Get Selected Departure City
     [Documentation]    Obtiene la ciudad de origen seleccionada
     ${city}=    Get Selected List Label    ${HOME_DEPARTURE_SELECT}
-    [Return]    ${city}
+    RETURN    ${city}
 
 Get Selected Destination City
     [Documentation]    Obtiene la ciudad de destino seleccionada
     ${city}=    Get Selected List Label    ${HOME_DESTINATION_SELECT}
-    [Return]    ${city}
+    RETURN    ${city}
 
 Get All Departure Cities
     [Documentation]    Obtiene lista de todas las ciudades de origen disponibles
     @{cities}=    Get List Items    ${HOME_DEPARTURE_SELECT}
-    [Return]    @{cities}
+    RETURN    @{cities}
 
 Get All Destination Cities
     [Documentation]    Obtiene lista de todas las ciudades de destino disponibles
     @{cities}=    Get List Items    ${HOME_DESTINATION_SELECT}
-    [Return]    @{cities}
+    RETURN    @{cities}
 
 Click Find Flights Button
     [Documentation]    Hace click en el botón "Find Flights"
@@ -81,11 +81,11 @@ Select Random Departure City
     @{cities}=    Get List Items    ${HOME_DEPARTURE_SELECT}
     ${random_city}=    Evaluate    random.choice(${cities})    random
     Select Departure City    ${random_city}
-    [Return]    ${random_city}
+    RETURN    ${random_city}
 
 Select Random Destination City
     [Documentation]    Selecciona una ciudad de destino aleatoria
     @{cities}=    Get List Items    ${HOME_DESTINATION_SELECT}
     ${random_city}=    Evaluate    random.choice(${cities})    random
     Select Destination City    ${random_city}
-    [Return]    ${random_city}
+    RETURN    ${random_city}

@@ -7,6 +7,9 @@ Library          Collections
 Resource         ../data/locators.robot
 Resource         ../data/testData.robot
 
+*** Variables ***
+${SELECTED_FLIGHT}    ${EMPTY}
+
 *** Keywords ***
 Verify Flight List Page Is Displayed
     [Documentation]    Verifica que la página de lista de vuelos está visible
@@ -26,7 +29,7 @@ Get Number Of Available Flights
     [Documentation]    Obtiene el número de vuelos disponibles
     ${count}=    Get Element Count    ${FLIGHTS_TABLE_ROWS}
     Should Be True    ${count} > 0    No flights found
-    [Return]    ${count}
+    RETURN    ${count}
 
 Get Flight Details By Index
     [Documentation]    Obtiene los detalles de un vuelo por su índice (0-based)
@@ -47,7 +50,7 @@ Get Flight Details By Index
     ...    arrival=${arrival}
     
     Log    Flight ${index} details: ${flight_details}
-    [Return]    &{flight_details}
+    RETURN    &{flight_details}
 
 Get All Flights Details
     [Documentation]    Obtiene los detalles de todos los vuelos disponibles
@@ -59,7 +62,7 @@ Get All Flights Details
         Append To List    ${all_flights}    ${flight}
     END
     
-    [Return]    @{all_flights}
+    RETURN    @{all_flights}
 
 Select Flight By Index
     [Documentation]    Selecciona un vuelo por su índice (0-based)
@@ -68,7 +71,7 @@ Select Flight By Index
     
     # Guardar detalles del vuelo antes de seleccionarlo
     &{flight_details}=    Get Flight Details By Index    ${index}
-    Set Suite Variable    &{SELECTED_FLIGHT}    &{flight_details}
+    Set Suite Variable    ${SELECTED_FLIGHT}    ${flight_details}
     
     # Click en el botón Choose This Flight
     Click Button    xpath:(${FLIGHTS_TABLE_ROWS})[${row_index}]//input[@type='submit']
@@ -96,7 +99,7 @@ Select Cheapest Flight
     
     Log    Cheapest flight is at index ${cheapest_index} with price $${min_price}
     Select Flight By Index    ${cheapest_index}
-    [Return]    ${cheapest_index}
+    RETURN    ${cheapest_index}
 
 Select Most Expensive Flight
     [Documentation]    Selecciona el vuelo más caro
@@ -118,7 +121,7 @@ Select Most Expensive Flight
     
     Log    Most expensive flight is at index ${expensive_index} with price $${max_price}
     Select Flight By Index    ${expensive_index}
-    [Return]    ${expensive_index}
+    RETURN    ${expensive_index}
 
 Select Flight By Airline
     [Documentation]    Selecciona el primer vuelo de una aerolínea específica
