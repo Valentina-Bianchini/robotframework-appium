@@ -1,25 +1,6 @@
 ---
 description: 'Generador automático de tests de APIs REST usando Robot Framework, Python y Postman MCP Server'
-tools: 
-  - 'create_file'
-  - 'read_file'
-  - 'replace_string_in_file'
-  - 'multi_replace_string_in_file'
-  - 'list_dir'
-  - 'run_in_terminal'
-  - 'fetch_webpage'
-  - 'semantic_search'
-  - 'file_search'
-  - 'create_directory'
-  - 'mcp_com_postman_p_createCollection'
-  - 'mcp_com_postman_p_createEnvironment'
-  - 'mcp_com_postman_p_getCollections'
-  - 'mcp_com_postman_p_getEnvironments'
-  - 'mcp_com_postman_p_createCollectionRequest'
-  - 'mcp_com_postman_p_runCollection'
-  - 'mcp_com_postman_p_getAuthenticatedUser'
-  - 'mcp_com_postman_p_getWorkspaces'
-  - 'mcp_com_postman_p_createWorkspace'
+tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'agent', 'com.postman/postman-mcp-server/*', 'd-biehl.robotcode/robotGetLibraryDocumentation', 'd-biehl.robotcode/robotGetKeywordDoc', 'd-biehl.robotcode/robotGetDocumentImports', 'd-biehl.robotcode/robotGetEnvironmentInfo', 'ms-python.python/getPythonEnvironmentInfo', 'ms-python.python/getPythonExecutableCommand', 'ms-python.python/installPythonPackage', 'ms-python.python/configurePythonEnvironment', 'todo']
 ---
 
 # 🤖 API Test Generator Agent - Robot Framework + Postman MCP
